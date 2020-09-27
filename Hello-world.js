@@ -5,15 +5,28 @@ let http = require("http");
 // Express returns a request handler function
 let app = express();
 
-// Passive middleware (it does not return or modify anything)
+// Logging middleware
 app.use((req, res, next) => {
     console.log(`${req.method} received when going to ${req.url}`);
     next(); 
 })
 
+// Authentication middleware
+app.use((req, res, next) => {
+    
+    let minutes = (new Date()).getMinutes();
+    if(minutes % 2 == 0) {
+        next();
+    }
+    else {
+        res.statusCode = 403;
+        res.end("Not authorized!");
+    }
+})
+
+// Response 
 app.use((req, res) => {
-    res.writeHead(200, {"Content-type": "text/plain"});
-    res.end(`Thanks for visiting ${req.url}`);
+    res.end(`Secret password is Potato`);
 })
 
 http.createServer(app).listen(3000);
