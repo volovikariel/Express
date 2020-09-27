@@ -1,14 +1,19 @@
-// Hello world branch
+// Hello world express branch
 let express = require("express");
+let http = require("http");
 
+// Express returns a request handler function
 let app = express();
 
-// Listens to request on (in this case) localhost:3000/ and returns Hello world HTML
-app.get("/", (request, response) => {
-    response.send("<h1>Hello world!</h1>");
-});
+// Passive middleware (it does not return or modify anything)
+app.use((req, res, next) => {
+    console.log(`${req.method} received when going to ${req.url}`);
+    next(); 
+})
 
-// Defines the port
-app.listen(3000, () => {
-    console.log("Express started listening on port 3000");
-});
+app.use((req, res) => {
+    res.writeHead(200, {"Content-type": "text/plain"});
+    res.end(`Thanks for visiting ${req.url}`);
+})
+
+http.createServer(app).listen(3000);
