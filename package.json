@@ -1,0 +1,22 @@
+{
+  "name": "express_book",
+  "version": "1.0.0",
+  "description": "Branches = separate chapters/examples in the book",
+  "main": "Hello-world.js",
+  "scripts": {
+    "start": "node ./Hello-world.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/volovikariel/Express.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/volovikariel/Express/issues"
+  },
+  "homepage": "https://github.com/volovikariel/Express#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
