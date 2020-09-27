@@ -19,22 +19,9 @@ app.get("/", (req, res) => {
     res.end("Welcome to the homepage!");
 })
 
+// Send files!
 app.get("/about", (req, res) => {
-    res.end("Welcome to the about page!");
-})
-
-// Route which isn't entirely fixed! Keeps track of :who
-app.get("/users/:who", (req, res) => {
-    res.end(`Hello ${req.params.who}`);
-})
-
-// Redirects to a different website when you search it, either full URL or relative
-app.get("/google", (req, res) => {
-    res.redirect(`https://google.com`);
-})
-
-app.get("/redirect", (req, res) => {
-    res.redirect(`/about`);
+    res.sendFile(path.resolve(__dirname, "public/wallpaper.jpg"));
 })
 
 // If it's not any of the others, it'll be here
