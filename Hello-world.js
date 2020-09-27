@@ -1,15 +1,13 @@
 // Hello world express branch
 let express = require("express");
+let logger = require("morgan");
 let http = require("http");
 
 // Express returns a request handler function
 let app = express();
 
-// Logging middleware
-app.use((req, res, next) => {
-    console.log(`${req.method} received when going to ${req.url}`);
-    next(); 
-})
+// Logging middleware with Morgan
+app.use(logger("short"));
 
 // Authentication middleware
 app.use((req, res, next) => {
