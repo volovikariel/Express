@@ -1,11 +1,13 @@
 // In testing branch
 
-// Allows us to use the parse function for URLs
-let url = require("url");
-let parsedUrl = url.parse("https://www.google.com/search?q=potato");
+// Allows us to use http.createServer() 
+let http = require("http");
 
-// Display all values
-console.table(parsedUrl);
+function requestHandler(request, response) {
+    console.log(`Request url: ${request.url}`); // Url in the shape of /, /home, etc. 
+    response.end(`End of response.`);
+}
 
-// Specific ones
-console.log(`Query: ${parsedUrl.query}`);
+let server = http.createServer(requestHandler);
+
+server.listen(3000);
