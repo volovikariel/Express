@@ -28,6 +28,15 @@ app.get("/users/:who", (req, res) => {
     res.end(`Hello ${req.params.who}`);
 })
 
+// Redirects to a different website when you search it, either full URL or relative
+app.get("/google", (req, res) => {
+    res.redirect(`https://google.com`);
+})
+
+app.get("/redirect", (req, res) => {
+    res.redirect(`/about`);
+})
+
 // If it's not any of the others, it'll be here
 app.use((req, res) => {
     res.statusCode = 404;
