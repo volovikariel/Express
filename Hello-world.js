@@ -1,6 +1,7 @@
 // Hello world express branch
 let express = require("express");
 let logger = require("morgan");
+let path = require("path");
 let http = require("http");
 
 // Express returns a request handler function
@@ -9,22 +10,15 @@ let app = express();
 // Logging middleware with Morgan
 app.use(logger("short"));
 
-// Authentication middleware
-app.use((req, res, next) => {
-    
-    let minutes = (new Date()).getMinutes();
-    if(minutes % 2 == 0) {
-        next();
-    }
-    else {
-        res.statusCode = 403;
-        res.end("Not authorized!");
-    }
-})
 
-// Response 
+let publicPath = path.resolve(__dirname, "public");
+// Sends static files in the public path
+app.use(express.static(publicPath));
+
+// If it doesn't find any static files it comes here
 app.use((req, res) => {
-    res.end(`Secret password is Potato`);
+    res.writeHead(200, {"Content-Type": "text/plain"});
+    res.end(`No static files D":`);
 })
 
 http.createServer(app).listen(3000);
