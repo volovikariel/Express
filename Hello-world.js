@@ -10,15 +10,28 @@ let app = express();
 // Logging middleware with Morgan
 app.use(logger("short"));
 
-
+// Static middleware
 let publicPath = path.resolve(__dirname, "public");
 // Sends static files in the public path
 app.use(express.static(publicPath));
 
-// If it doesn't find any static files it comes here
+app.get("/", (req, res) => {
+    res.end("Welcome to the homepage!");
+})
+
+app.get("/about", (req, res) => {
+    res.end("Welcome to the about page!");
+})
+
+// Route which isn't entirely fixed! Keeps track of :who
+app.get("/users/:who", (req, res) => {
+    res.end(`Hello ${req.params.who}`);
+})
+
+// If it's not any of the others, it'll be here
 app.use((req, res) => {
-    res.writeHead(200, {"Content-Type": "text/plain"});
-    res.end(`No static files D":`);
+    res.statusCode = 404;
+    res.end(`404`);
 })
 
 http.createServer(app).listen(3000);
