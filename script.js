@@ -12,7 +12,7 @@ app.use(morgan("short"));
 
 // Only match users/number now
 let filePath = path.join(__dirname, "static");
-app.use(express.static(filePath));
+app.use("/static", express.static(filePath));
 
 // Uses the apiRouter
 app.use("/api", apiRouter);
