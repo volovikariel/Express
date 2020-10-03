@@ -1,8 +1,9 @@
 // Guestbook code
 let path = require("path");
-let http = require("http");
 let express = require("express");
 let morgan = require("morgan");
+// Routing middleware
+let apiRouter = require("./routes/api_router");
 
 let app = express();
 
@@ -10,15 +11,10 @@ let app = express();
 app.use(morgan("short"));
 
 // Only match users/number now
-app.get(/^\/users\/(\d+)$/, (req, res) => {
-    // Access the first group
-    res.send(`ID: ${JSON.stringify(req.params)}`);
-})
+let filePath = path.join(__dirname, "static");
+app.use(express.static(filePath));
 
-// Response 404 if unknown source 
-app.use((req, res) => {
-    res.status(404);
-    res.send("User not found");
-})
+// Uses the apiRouter
+app.use("/api", apiRouter);
 
-http.createServer(app).listen(3000);
+app.listen(3000);
