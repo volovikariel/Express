@@ -9,15 +9,16 @@ let app = express();
 // Use logger 
 app.use(morgan("short"));
 
-app.get("/users/:userid", (req, res) => {
-    // Base 10
-    res.send(`Hello ${req.params.userid}`);
+// Only match users/number now
+app.get(/^\/users\/(\d+)$/, (req, res) => {
+    // Access the first group
+    res.send(`ID: ${JSON.stringify(req.params)}`);
 })
 
 // Response 404 if unknown source 
 app.use((req, res) => {
     res.status(404);
-    res.send("File not found!");
+    res.send("User not found");
 })
 
 http.createServer(app).listen(3000);
