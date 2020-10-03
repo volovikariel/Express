@@ -9,8 +9,9 @@ let app = express();
 // Use logger 
 app.use(morgan("short"));
 
-app.get("/ariel", (req, res) => {
-    res.send("Hello ariel :D");
+app.get("/users/:userid", (req, res) => {
+    // Base 10
+    res.send(`Hello ${req.params.userid}`);
 })
 
 // Response 404 if unknown source 
