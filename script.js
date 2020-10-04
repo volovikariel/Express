@@ -1,20 +1,25 @@
-// Guestbook code
-let path = require("path");
+// JSON_API Branch
 let express = require("express");
-let morgan = require("morgan");
-// Routing middleware
-let apiRouter = require("./routes/api_router");
 
 let app = express();
 
-// Use logger 
-app.use(morgan("short"));
+// Can test these with CURL -X Delete/Post/Put, default is get request
+app.get("/", (req, res) => {
+    res.send("Getteeeeed!");
+});
 
-// Only match users/number now
-let filePath = path.join(__dirname, "static");
-app.use("/static", express.static(filePath));
+app.post("/", (req, res) => {
+    res.send("posted");
+});
 
-// Uses the apiRouter
-app.use("/api", apiRouter);
+app.put("/", (req, res) => {
+    res.send("Put");
+});
 
-app.listen(3000);
+app.delete("/", (req, res) => {
+    res.send("Deleted");
+});
+
+app.listen(3000, () => {
+    console.log("Started listening on 3000");
+});
