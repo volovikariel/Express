@@ -1,4 +1,7 @@
-Branches = separate chapters/examples in the book 
-
-
-# Note: Use sequelize to connect Node to various databases
+# Different branches correlate to different sections
+Mongoose
+JSON_API
+Routing
+File-server
+GuestBook
+HellowWorld-express (HelloWorld but with a public can serve a static file)
