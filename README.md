@@ -1,4 +1,4 @@
-# Different branches correlate to different sections
+# Different branches correlate to different sections [of a book]
 Mongoose
 JSON_API
 Routing
